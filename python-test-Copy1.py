@@ -1,21 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Python Test
-# You have been provided with learning activity data collected from a global sample of students. The attributes are broken down into demographic features like gender and nationality, academic backgrounds like educational stage and grade level, and behavioral observations like engagement counts and parent satisfaction. 
-# 
-# The students are classified into three ability levels based on how they perform on selected material: 
-# 
-# __Low__: grades ranging from 0-39 <br>
-# __Medium__: grades ranging from 40-89 <br>
-# __High__: grades ranging from 90-100 <br>
-# 
-# You'll have to dive into the data, learn the attributes, and construct a model that can predict the performance level of a given student.  Some common libraries have been loaded, but use any more that you wish.
-
-# # Load the Data
-# Load the data into a pandas dataframe. Display the shape of the data, and count the number of null values in each column.
-
-# In[1]:
 
 
 import pandas as pd
@@ -26,7 +8,7 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
 
-# In[2]:
+
 
 
 # Load the dataset
@@ -34,7 +16,7 @@ data = pd.read_csv('data.csv')
 data.head()
 
 
-# In[3]:
+
 
 
 # shape of the dataset
@@ -43,48 +25,6 @@ print(data.shape)
 # count the number of missing values (null) in each column
 print(data.isna().sum())
 
-
-# # Perform basic EDA
-# Use a library of your choice to visualise attributes in the data. Answer each question below with a visualisation. The attribute glossary has also been provided for your reference.
-# 
-# ## Attribute Glossary
-# Gender- student's gender (nominal: 'Male' or 'Female’)
-# 
-# Nationality- student's nationality (nominal:' Luxembourg',' Lebanon',' Egypt',' USA',' Nigeria',' Venezuela',' Rwanda',' Germany',' France',' India',' Cambodia',' Chile',' Spain')
-# 
-# Place of birth- student's Place of birth (nominal:' Luxembourg',' Lebanon',' Egypt',' USA',' Nigeria',' Venezuela',' Rwanda',' Germany',' France',' India',' Cambodia',' Chile',' Spain')
-# 
-# Educational Stages- educational level student belongs (nominal:‘lowerlevel’,’MiddleSchool’,’HighSchool’)
-# 
-# Grade Levels- grade to which the student belongs (nominal:‘G-01’, ‘G-02’, ‘G-03’, ‘G-04’, ‘G-05’, ‘G-06’, ‘G-07’, ‘G-08’, ‘G-09’, ‘G-10’, ‘G-11’, ‘G-12‘)
-# 
-# Section ID- classroom student belongs (nominal:’A’,’B’,’C’)
-# 
-# Topic- course topic (nominal:'Mathematics",'English','Science','Geography','History','French','Spanish','Sport Science’)
-# 
-# Semester- school year semester (nominal:’First’,’Second’)
-# 
-# Parent responsible for student (nominal:’mother’,’father’)
-# 
-# Raised hand- how many times the student raises his/her hand in the classroom (numeric, discrete)
-# 
-# Used resources- how many times the student uses course content (numeric, discrete)
-# 
-# Viewed notifications- how many times the student checks their new notifications (numeric, discrete)
-# 
-# Discussion groups- how many times the student participate on discussion groups (numeric, discrete)
-# 
-# Parent Answered Survey- parent answered the surveys which are provided from school or not (nominal:’Yes’,’No’)
-# 
-# Parent School Satisfaction- the degree of parental satisfaction towards the school (nominal:’Yes’,’No’)
-# 
-# Student Absence Days- the number of absence days for each student (nominal:above-7, under-7)
-
-# ## Show the relation of each column to students' ability level
-# 
-# Somehow indicate the columns with a positive correlation or relationship to 'abilityLevel'. This could be via a table or a visualisation.
-
-# In[4]:
 
 
 # fill the missing values with 0
@@ -97,14 +37,13 @@ data2 = data1.drop(['parentSchoolSatisfaction','studentAbsenceDays','gradeG', 'p
 data2.info()
 
 
-# In[5]:
+
 
 
 sns.countplot(x = "abilityLevel", data = data2, palette = "Greens");
 plt.show()
 
 
-# In[7]:
 
 
 from sklearn.preprocessing import OrdinalEncoder
@@ -185,14 +124,6 @@ data = df.values
 
 
 # # Model the data
-
-# Answer the questions below with whatever machine learning libraries you choose. The goal here is to predict the 'abilityLevel' attribute for every student.
-
-# ## Prepare the data
-# Transform the data in any way you choose. Be ready to explain your reasoning for selecting the columns that need to be transformed as well as the transformations applied. When all transformations are applied, split the data as necessary for prediction.
-
-# In[174]:
-
 
 import numpy as np
 import torch
@@ -344,14 +275,6 @@ pred = pred.detach().numpy()
 print ("The accuracy is", accuracy_score(test_labels_T, np.argmax(pred, axis=1)))
 
 
-# ## Predict student level
-# Feed your input data into a model of your choice and observe how it performs. Be ready to explain why you selected this model for your experiment and the metric you used to evaluate performance.
-
-# ## Tune your hyper-parameters
-# Demonstrate a tuning of hyper-parameters that will improve performance. You can do this via manual testing or a programatic package. Be ready to explain why those parameters affected model performance.
-
-# In[462]:
-
 
 #from sklearn.datasets import make_blobs
 from sklearn.model_selection import RepeatedStratifiedKFold
@@ -395,10 +318,3 @@ print(classification_report(test_labels, predictions))
 rmse_test = MSE(test_labels, predictions)**(1/2)
 # Print the test set RMSE
 print('Test set RMSE of rf: {:.2f}'.format(rmse_test))
-
-
-# # Extra thoughts for discussion
-# 
-# What other models might you have chosen?<br>
-# What more information might be relevant to classify students?<br>
-# If an accurate model is developed, how might it be used to improve a student's experience using CENTURY?
